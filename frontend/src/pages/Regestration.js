@@ -22,11 +22,17 @@ function Regestration(props) {
             "address":address
         }
 
-        axios.post(ApiData.registration, postJson,{withCredentials:true})
-            .then(response =>{
-                console.log(response.data)
+        console.log(postJson)
+
+        axios.post(ApiData.registration, postJson, {withCredentials:true})
+            .then(x=>{
+                console.log(x.data)
             })
 
+        // axios.post(ApiData.registration, postJson,{withCredentials:true})
+        //     .then(x=>{
+        //         console.log(x.data)
+        //     })
     }
 
 

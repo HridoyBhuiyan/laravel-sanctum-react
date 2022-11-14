@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class RegistrationController extends Controller
 {
     function getRegistration(Request $request){
+//        return "hello";
         $name = $request->input('username');
         $email = $request->input('email');
         $password = $request->input('password');
@@ -39,7 +40,6 @@ class RegistrationController extends Controller
                         'email'=>$email,
                         'address'=>$address
                     ]);
-
 
 
 

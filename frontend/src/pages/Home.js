@@ -5,23 +5,27 @@ import {Container} from "react-bootstrap";
 import axios from "axios";
 
 function Home(props) {
-    const [data, setData]=useState(null);
+
+    const [data, setData]= useState(null);
 
     const getData=()=>{
-        axios.post("http://localhost:8000/api/user",{id:1},{withCredentials:true})
+        // axios.post("http://localhost:8000/api/user",{id:1},{withCredentials:true})
+        //     .then(x=>{
+        //         console.log(x.data)
+        //     })
+
+        axios.get("http://localhost:8000/api/user", {withCredentials:true})
             .then(x=>{
                 setData(x.data)
                 console.log(x.data)
             })
+
+
     }
     useEffect(x=>{
-        console.log(data)
         getData()
+        console.log(data)
     }, [])
-
-
-
-    // this is after staging
 
 
 

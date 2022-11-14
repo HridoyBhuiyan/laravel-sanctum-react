@@ -11,8 +11,14 @@ use App\Models\User;
 //    return $request->user();
 //});
 
-Route::post('/user', function (Request $request) {return $request->input('id');});
+//Route::post('/user', function (Request $request) {return $request->input('id');});
+Route::get('/user', function (Request $request) {
+    User::get();
+});
 
 
 Route::post('/registration', [RegistrationController::class,'getRegistration'] );
+//Route::get('/registration', function(){
+//    return"works";
+//});
 Route::post('/login', [LoginController::class,'getLogin'] );
