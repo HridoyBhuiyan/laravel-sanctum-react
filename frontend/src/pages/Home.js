@@ -6,27 +6,27 @@ import axios from "axios";
 
 function Home(props) {
 
-    const [data, setData]= useState(null);
-
-    const getData=()=>{
-        // axios.post("http://localhost:8000/api/user",{id:1},{withCredentials:true})
-        //     .then(x=>{
-        //         console.log(x.data)
-        //     })
-
-        axios.get("http://localhost:8000/api/user", {withCredentials:true})
-            .then(x=>{
-                setData(x.data)
-                console.log(x.data)
-            })
-
-
-    }
-    useEffect(x=>{
-        getData()
-        console.log(data)
-    }, [])
-
+    // const [data, setData]= useState(null);
+    //
+    // const getData=()=>{
+    //     // axios.post("http://localhost:8000/api/user",{id:1},{withCredentials:true})
+    //     //     .then(x=>{
+    //     //         console.log(x.data)
+    //     //     })
+    //
+    //     axios.get("http://localhost:8000/api/user", {withCredentials:true})
+    //         .then(x=>{
+    //             setData(x.data)
+    //             console.log(x.data)
+    //         })
+    //
+    //
+    // }
+    // useEffect(x=>{
+    //     getData()
+    //     console.log(data)
+    // }, [])
+    //
 
 
     return (
