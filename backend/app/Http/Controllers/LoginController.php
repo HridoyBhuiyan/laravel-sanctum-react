@@ -12,10 +12,31 @@ class LoginController extends Controller
         $name = $request->input('username');
         $password = $request->input('password');
         $sourcePassword = Crypt::decrypt(User::where('name', $name)->pluck('password')->first());
+        $user = User::where('name', $name)->first();
 
-        if ((User::where('name',$name)->count()==1) && ($password==$sourcePassword)){
-            return "logged in";
+
+        if($user->hasVerifiedEmail()){
+
+                if ((User::where('name',$name)->count()==1) && ($password==$sourcePassword)){
+                $user = User::where('name', $name)->first();
+                $userId = User::where('name',$name)->pluck('id')->first();
+                $expireAt = now()->addMinute(10);
+                $token = $user->createToken('auth_token', ['server:update'], $expireAt)->plainTextToken;
+
+                return response()->json([
+                    'id'=>$userId,
+                    'token'=>$token,
+                    'expire'=>$expireAt
+                ]);
+            }
         }
+
+        else if (!$user->hasVerifiedEmail()){
+            return response()->json([
+                "message"=>"Email not verified"
+            ], 201);
+        }
+
 
 
     }

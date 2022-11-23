@@ -8,6 +8,7 @@ import Regestration from "./pages/Regestration";
 import UserDetails from "./pages/UserDetails";
 import EmailSendPage from "./pages/EmailSendPage";
 import Home from "./pages/Home";
+import RegistrationSuccess from "./pages/RegistrationSuccess";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,6 +18,7 @@ root.render(
               <Route path={'/'} element={<Home/>}/>
               <Route path={'/login'} element={<LoginPage/>}/>
               <Route path={'/registration'} element={<Regestration/>}/>
+              <Route path={'/registration/:token/:name'} element={<RegistrationSuccess/>}/>
               <Route path={'/userinfo'} element={<UserDetails/>}/>
               <Route path={'/sendmail'} element={<EmailSendPage/>}/>
           </Routes>

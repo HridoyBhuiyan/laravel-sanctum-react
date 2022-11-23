@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Adrianorosa\GeoLocation\GeoLocation;
 use App\Models\VisitorModel;
+use http\Env;
 use Illuminate\Http\Request;
 
 class VisitorController extends Controller
 {
-    function visitorInfo($ip){
+    function visitorInfo($ip, Request $request){
 
         $visitorInfo = GeoLocation::lookup($ip);
         $country = $visitorInfo->getCountry();
@@ -21,7 +22,7 @@ class VisitorController extends Controller
             'city'=>$city
         ]);
 
-        return $result;
+        return $visitorInfo;
 
     }
 }

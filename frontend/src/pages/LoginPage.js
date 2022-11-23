@@ -2,25 +2,41 @@ import React, {Fragment} from 'react';
 import NavMain from "../composnent/NavMain";
 import FooterMain from "../composnent/FooterMain";
 import {Button} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, redirect, useNavigate} from "react-router-dom";
 import axios from "axios";
 import ApiData from "../ApiData";
+import Cookies from "universal-cookie/es6";
 
 function LoginPage(props) {
-    const getLogin=()=>{
+    const cookie = new Cookies;
+    const navigate = useNavigate();
+     const getLogin=async ()=>{
         let username = document.getElementById("username").value;
         let password = document.getElementById('password').value;
-        let postJSON = {
-            'username':username,
-            'password':password
-        }
-        axios.post(ApiData.login, postJSON, {withCredentials:true})
-            .then(x=>{
-                console.log(x.data)
-            })
-            .catch(error=>{
-                console.log(error)
-            })
+            let postJSON = {
+                'username':username,
+                'password':password
+            }
+            await axios.post(ApiData.login, postJSON, {withCredentials:true})
+                .then(x=>{
+                    console.log(x)
+                    if (x.status===200){
+                        console.log(x.data)
+                        let id = x.data.id;
+                        let token = x.data.token;
+                        localStorage.setItem('userID',id)
+                        cookie.set('access_token', token, {maxAge: 60*60*24})
+                        navigate('/userinfo')
+                    }
+                    else{
+                        alert(x.data)
+                    }
+
+
+                })
+                .catch(error=>{
+                    console.log(error)
+                })
 
     }
     return (
