@@ -20,7 +20,7 @@ class LoginController extends Controller
                 if ((User::where('name',$name)->count()==1) && ($password==$sourcePassword)){
                 $user = User::where('name', $name)->first();
                 $userId = User::where('name',$name)->pluck('id')->first();
-                $expireAt = now()->addMinute(10);
+                $expireAt = now()->addMinute(60*24);
                 $token = $user->createToken('auth_token', ['server:update'], $expireAt)->plainTextToken;
 
                 return response()->json([
